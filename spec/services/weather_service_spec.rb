@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe WeatherService do
   it 'can get lat and long for location given in params', :vcr do
-    json = WeatherService.get_weather('39.738453', '-104.984853')
+    json = WeatherService.get_location_weather('39.738453', '-104.984853')
 
     expect(json).to have_key(:current)
     expect(json[:current]).to have_key(:dt)
