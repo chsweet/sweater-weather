@@ -31,6 +31,5 @@ RSpec.describe WeatherService do
     expect(json[:hourly][0]).to have_key(:temp)
     expect(json[:hourly][0][:weather][0]).to have_key(:description)
     expect(json[:hourly][0][:weather][0]).to have_key(:icon)
-
   end
 end
