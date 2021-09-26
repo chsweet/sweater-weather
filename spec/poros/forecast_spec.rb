@@ -546,6 +546,8 @@ RSpec.describe Forecast do
 
     expect(forecast).to be_a(Forecast)
 
+    expect(forecast.id).to be(nil)
+
     expect(forecast.current_weather).to be_a(Hash)
     expect(forecast.current_weather).to have_key(:datetime)
     expect(forecast.current_weather).to have_key(:sunrise)

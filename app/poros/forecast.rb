@@ -1,9 +1,11 @@
 class Forecast
-  attr_reader :current_weather,
+  attr_reader :id,
+              :current_weather,
               :daily_weather,
               :hourly_weather
 
   def initialize(weather_data)
+    @id = nil
     @current_weather = format_current(weather_data[:current])
     @daily_weather = format_daily(weather_data[:daily][0..4])
     @hourly_weather = format_hourly(weather_data[:hourly][0..7])
