@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe UpsplashService do
   it 'can get lat and long for location given in params', :vcr do
-    json = UpsplashService.get_photo('Denver, CO')
-  
+    json = UpsplashService.get_imgage('Denver, CO')
+
     expect(json).to have_key(:results)
     expect(json[:results][0]).to have_key(:description)
     expect(json[:results][0]).to have_key(:urls)

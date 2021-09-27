@@ -1,5 +1,5 @@
 class UpsplashService < BaseService
-  def self.get_photo(location)
+  def self.get_imgage(location)
     response = conn('https://api.unsplash.com/search/photos/').get do |req|
       req.params['client_id'] = ENV['unsplash_key']
       req.params['query'] = location
