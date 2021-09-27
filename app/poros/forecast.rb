@@ -12,9 +12,9 @@ class Forecast
   end
 
   def format_current(current_weather)
-    current = {  datetime: current_weather[:dt],
-                 sunrise: current_weather[:sunrise],
-                 sunset: current_weather[:sunset],
+    current = {  datetime: Time.at(current_weather[:dt]),
+                 sunrise: Time.at(current_weather[:sunrise]),
+                 sunset: Time.at(current_weather[:sunset]),
                  temperature: current_weather[:temp],
                  feels_like: current_weather[:feels_like],
                  humidity: current_weather[:humidity],
@@ -27,9 +27,9 @@ class Forecast
 
   def format_daily(daily_weather)
     daily_weather.map do |day|
-      {  datetime: day[:dt],
-         sunrise: day[:sunrise],
-         sunset: day[:sunset],
+      {  datetime: Time.at(day[:dt]),
+         sunrise: Time.at(day[:sunrise]),
+         sunset: Time.at(day[:sunset]),
          max_temp: day[:temp][:max],
          min_temp: day[:temp][:min],
          conditions: day[:weather][0][:description],
@@ -40,7 +40,7 @@ class Forecast
 
   def format_hourly(hourly_weather)
     hourly_weather.map do |hour|
-      { time: hour[:dt],
+      { time: Time.at(hour[:dt]),
         temperature: hour[:temp],
         conditions: hour[:weather][0][:description],
         icon: hour[:weather][0][:icon]
