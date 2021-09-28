@@ -1,6 +1,13 @@
 class Api::V1::SessionsController < ApplicationController
-  skip_before_action :require_authentication
   def create
     user = User.find_by(email: params[:email].downcase)
+
+    if user.nil?
+      render(json: { message: "User email or password is invalid" }, status: :bad_request)
+    elsif user.authenticate(params[:password])
+      render(json: UsersSerializer.new(user))
+    else
+      render(json: { message: "User email or password is invalid" }, status: :bad_request)
+    end
   end
 end
