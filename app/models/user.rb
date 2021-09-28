@@ -2,7 +2,7 @@ class User < ApplicationRecord
   before_validation :generate_api_key, on: :create
 
   validates :email, presence: true, uniqueness: true
-  validates :api_key, presence: true
+  validates :api_key, presence: true, uniqueness: true
 
   has_secure_password
 
