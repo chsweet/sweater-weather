@@ -24,4 +24,10 @@ RSpec.describe 'breweries API' do
     expect(breweries[:attributes][:breweries][0]).to have_key(:name)
     expect(breweries[:attributes][:breweries][0]).to have_key(:brewery_type)
   end
+
+  it 'returns 400 error if quantity sent is not greater than 0', :vcr do
+    get '/api/v1/breweries', params: { location: 'Denver, CO', quantity: -1 }
+
+    expect(response).to have_http_status(400)
+  end
 end
