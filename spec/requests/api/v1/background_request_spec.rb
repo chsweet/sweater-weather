@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'background API' do
   it 'sends background image based on location in params', :vcr do
-    get '/api/v1/background', params: { location: 'Denver, CO' }
+    get '/api/v1/backgrounds', params: { location: 'Denver, CO' }
 
     expect(response).to be_successful
 
