@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'road trip API' do
   it 'returns road trip information based off of user input', :vcr do
-    user = User.create!(email: 'test@test.com', password_digest: "$2a$04$uoYSPIV4t.z5O4rhHa6I.OcnAzJnlrl90sOQuMop6F62EwzCgTSGW", api_key: "02b1f503a4920179032b4c36103c1053")
+    user = User.create!(email: 'test@test.com', password_digest: "$2a$04$uoYSPIV4t.z5O4rhHa6I.OcnAzJnlrl90sOQuMop6F62EwzCgTSGW")
 
     road_trip_attributes = {
       "origin": 'Denver, CO',
       "destination": 'Crested Butte, CO',
-      "api_key": '02b1f503a4920179032b4c36103c1053'
+      "api_key": "#{user.api_key}"
     }
 
     headers = { 'CONTENT_TYPE' => 'application/json', "Accept": 'application/json' }

@@ -1,14 +1,12 @@
 class Api::V1::RoadTripController < ApplicationController
   def create
-    require "pry";binding.pry
-    user = User.find_by(api_key: params[:api_key]
-self.create_roadtrip(from, to)
+    user = User.find_by(api_key: params[:api_key])
     if user.nil?
       render(json: { message: "User does is unauthorized." }, status: :unauthorized)
-    elsif asdfjsd
-      ndns
     else
-      dasfd
+      roadtrip = RoadTripFacade.create_roadtrip(params[:origin], params[:destination])
+
+      render(json: RoadTripSerializer.get_roadtrip(roadtrip))
     end
   end
 end
