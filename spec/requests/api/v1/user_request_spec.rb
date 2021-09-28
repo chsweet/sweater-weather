@@ -16,12 +16,12 @@ RSpec.describe 'user API' do
 
     json = JSON.parse(response.body, symbolize_names: true)
 
-    expect(json[:data]).to have_key([:id])
-    expect(json[:data]).to have_key([:type])
-    expect(json[:data]).to have_key([:attributes])
-    expect(json[:data][:attributes]).to have_key([:email])
-    expect(json[:data][:attributes]).to have_key([:api_key])
-    expect(json[:data][:attributes]).to_not have_key([:password_digest])
+    expect(json[:data]).to have_key(:id)
+    expect(json[:data]).to have_key(:type)
+    expect(json[:data]).to have_key(:attributes)
+    expect(json[:data][:attributes]).to have_key(:email)
+    expect(json[:data][:attributes]).to have_key(:api_key)
+    expect(json[:data][:attributes]).to_not have_key(:password_digest)
   end
 
   it 'returns 400 error if password and password_confirmation do match' do
@@ -34,7 +34,7 @@ RSpec.describe 'user API' do
     headers = { 'CONTENT_TYPE' => 'application/json', "Accept": 'application/json' }
 
     post '/api/v1/users', headers: headers, params: user_attributes.to_json
-
+require "pry";binding.pry
     expect(response).to have_http_status(400)
   end
 
