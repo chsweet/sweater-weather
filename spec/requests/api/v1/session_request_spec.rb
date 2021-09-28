@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'sessions API' do
-  it 'can authenticate user credentials and start session' do
+  it 'can authenticate user credentials' do
     user = User.create!(email: 'test@test.com', password_digest: "$2a$04$uoYSPIV4t.z5O4rhHa6I.OcnAzJnlrl90sOQuMop6F62EwzCgTSGW", api_key: "02b1f503a4920179032b4c36103c1053")
 
     user_login = {
@@ -43,7 +43,7 @@ RSpec.describe 'sessions API' do
 
     json = JSON.parse(response.body, symbolize_names: true)
 
-    expect(json[:message]).to eq("User email or password is invalid")
+    expect(json[:message]).to eq("User does not exist. Please register!")
   end
 
   it 'returns 400 error if password is invalid' do
