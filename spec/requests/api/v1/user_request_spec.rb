@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe 'user API' do
   it 'can create a new user and generate api_key', :vcr do
     user_attributes = {
-      email: 'test@test.com',
-      password: 'password',
-      password_confirmation: 'password'
+      "email": 'test@test.com',
+      "password": 'password',
+      "password_confirmation": 'password'
     }
 
     headers = { 'CONTENT_TYPE' => 'application/json', "Accept": 'application/json' }
@@ -14,14 +14,14 @@ RSpec.describe 'user API' do
 
     expect(response).to have_http_status(201)
 
-    response = JSON.parse(response.body, symbolize_names: true)
+    json = JSON.parse(response.body, symbolize_names: true)
 
-    expect(response[:data]).to have_key([:id])
-    expect(response[:data]).to have_key([:type])
-    expect(response[:data]).to have_key([:attributes])
-    expect(response[:data][:attributes]).to have_key([:email])
-    expect(response[:data][:attributes]).to have_key([:api_key])
-    expect(response[:data][:attributes]).to_not have_key([:password_digest])
+    expect(json[:data]).to have_key([:id])
+    expect(json[:data]).to have_key([:type])
+    expect(json[:data]).to have_key([:attributes])
+    expect(json[:data][:attributes]).to have_key([:email])
+    expect(json[:data][:attributes]).to have_key([:api_key])
+    expect(json[:data][:attributes]).to_not have_key([:password_digest])
   end
 
   it 'returns 400 error if password and password_confirmation do match' do

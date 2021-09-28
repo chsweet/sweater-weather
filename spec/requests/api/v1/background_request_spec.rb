@@ -20,6 +20,5 @@ RSpec.describe 'background API' do
     expect(background[:attributes][:image][:credit]).to have_key(:source)
     expect(background[:attributes][:image][:credit]).to have_key(:author)
     expect(background[:attributes][:image][:credit]).to have_key(:author_link)
-
   end
 end
