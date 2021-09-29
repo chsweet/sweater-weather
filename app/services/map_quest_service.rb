@@ -6,4 +6,13 @@ class MapQuestService < BaseService
     end
     JSON.parse(response.body, symbolize_names: true)
   end
+
+  def self.get_travel_time(from, to)
+    response = conn('http://www.mapquestapi.com/directions/v2/route').get do |req|
+      req.params['key'] = ENV['map_quest_key']
+      req.params['from'] = from
+      req.params['to'] = to
+    end
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end
