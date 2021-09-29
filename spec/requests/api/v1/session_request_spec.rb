@@ -27,7 +27,7 @@ RSpec.describe 'sessions API' do
     expect(json[:data][:attributes]).to_not have_key(:password_digest)
   end
 
-  xit 'returns 400 error if user is not found' do
+  it 'returns 400 error if user is not found' do
     user = User.create!(email: 'test@test.com', password_digest: "$2a$04$uoYSPIV4t.z5O4rhHa6I.OcnAzJnlrl90sOQuMop6F62EwzCgTSGW", api_key: "02b1f503a4920179032b4c36103c1053")
 
     user_login = {
@@ -39,14 +39,14 @@ RSpec.describe 'sessions API' do
 
     post '/api/v1/sessions', headers: headers, params: user_login.to_json
 
-    expect(response).to have_http_status(400)
+    expect(response).to have_http_status(404)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
     expect(json[:message]).to eq("User does not exist. Please register!")
   end
 
-  xit 'returns 400 error if password is invalid' do
+  it 'returns 400 error if password is invalid' do
     user = User.create!(email: 'test@test.com', password_digest: "$2a$04$uoYSPIV4t.z5O4rhHa6I.OcnAzJnlrl90sOQuMop6F62EwzCgTSGW", api_key: "02b1f503a4920179032b4c36103c1053")
 
     user_login = {
@@ -58,10 +58,10 @@ RSpec.describe 'sessions API' do
 
     post '/api/v1/sessions', headers: headers, params: user_login.to_json
 
-    expect(response).to have_http_status(400)
+    expect(response).to have_http_status(404)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
-    expect(json[:message]).to eq("User email or password is invalid")
+    expect(json[:message]).to eq("User email or password is invalid.")
   end
 end
